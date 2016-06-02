@@ -4,11 +4,13 @@ Sample Force.com Migration Project for Jenkins that allows tracking changes of s
 Gary Hamilton <ghamilton@acumensolutions.com>
 Version 1.0
 
-Sample project for retrieving Salesforce metadata changes using Jenkings:
-
-Running Apache Ant in job workspace executes retrieveMetadata task.
-Run supplying sf.serverurl, sf.username and sf.password in properties file specified by -Dsf.org=<folder name>. sf.org defaults to "dev" so Ant reads dev.properties file and stores metadata in ./dev folder.
-
-Jenkins will call ant with parameter for sf.org: -Dsf.org=dev
-
+* Download files to Jenkins job ./workspace folder.
+* build.xml defaults sf.org to "dev"
+  * dev.properties is loaded.
+  * Metadata is downloaded to "dev" sub-folder.
+* Set sf.serverurl, sf.username and sf.password in <sf.org>.properties or as build parameters:
+  * -Dsf.serverurl=test.salesforce.com -Dsf.username=<username> -Dsf.password=<password + security token>
+* Examples
+  * ant : loads default dev.properties with sf.serverurl, sf.username and sf.password values
+  * ant -Dsf.org=UAT : loads UAT.properties with sf.serverurl, sf.username and sf.password values and downloads to UAT folder
 
