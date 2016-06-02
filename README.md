@@ -1,5 +1,5 @@
 # SalesforceDevTrackingExample
-Sample Force.com Migration Project for Jenkins that allows tracking changes to sandbox metadata
+Sample Force.com Migration Project for Jenkins that allows tracking changes of sandbox metadata
 
 Gary Hamilton <ghamilton@acumensolutions.com>
 Version 1.0
