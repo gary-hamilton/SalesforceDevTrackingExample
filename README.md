@@ -13,4 +13,5 @@ Version 1.0
 * Examples
   * ant : loads default dev.properties with sf.serverurl, sf.username and sf.password values
   * ant -Dsf.org=UAT : loads UAT.properties with sf.serverurl, sf.username and sf.password values and downloads to UAT folder
+* archive_metadata.sh commits to local git repository, assumes remote "archive" has been defined. 
 
