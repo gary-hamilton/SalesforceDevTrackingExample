@@ -4,8 +4,8 @@ Sample Force.com Migration Project for Jenkins that allows tracking changes of s
 Gary Hamilton <ghamilton@acumensolutions.com>
 Version 1.0
 
-* Download files to Jenkins job ./workspace folder.
-* build.xml defaults sf.org to "dev"
+* Download files to Jenkins job ./workspace folder, can also be downloaded to folder and run manually.
+* build.xml defaults sf.org to "dev".
   * dev.properties is loaded.
   * Metadata is downloaded to "dev" sub-folder.
 * Set sf.serverurl, sf.username and sf.password in <sf.org>.properties or as build parameters:
