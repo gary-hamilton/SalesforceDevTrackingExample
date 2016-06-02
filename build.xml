@@ -1,0 +1,38 @@
+<project name="Sample Salesforce Ant tasks for multiple orgs" default="retrieveMetadata" basedir="." xmlns:sf="antlib:com.salesforce">
+
+    <property environment="env"/>
+ 	<condition property="sf.org" value="dev"> <not> <isset property="sf.org"/> </not> </condition>
+    <property file="${sf.org}.properties"/>
+
+    <!-- Setting default value for username, password and session id properties to empty string 
+         so unset values are treated as empty. Without this, ant expressions such as ${sf.username}
+         will be treated literally.
+    -->
+    <condition property="sf.username" value=""> <not> <isset property="sf.username"/> </not> </condition>
+    <condition property="sf.password" value=""> <not> <isset property="sf.password"/> </not> </condition>
+    <condition property="sf.sessionId" value=""> <not> <isset property="sf.sessionId"/> </not> </condition>    
+	
+    <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
+        <classpath>
+            <pathelement location="../ant-salesforce.jar" />        	
+        </classpath>
+    </taskdef>
+    
+	<!-- Retrieve metadata from org -->	
+	<target name="retrieveMetadata">	
+		<echo>
+properties file    : ${sf.org}.properties
+sf.username        : ${sf.username}
+sf.serverurl       : ${sf.serverurl}
+metadata.directory : ${metadata.directory}
+		</echo>		
+		<mkdir dir="${metadata.directory}"/>
+		<delete includeEmptyDirs="true"> <fileset dir="${metadata.directory}" includes="**/*"/> </delete>
+		<sf:retrieve username="${sf.username}" password="${sf.password}" 
+      	sessionId="${sf.sessionId}" serverurl="${sf.serverurl}" 
+      	maxPoll="500" pollWaitMillis="10000" retrieveTarget="${metadata.directory}" 
+      	unpackaged="unpackaged/package.xml"/>
+		 
+	</target>
+	
+</project>
