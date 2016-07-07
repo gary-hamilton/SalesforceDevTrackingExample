@@ -1,17 +1,30 @@
 # SalesforceDevTrackingExample
-Sample Force.com Migration Project for Jenkins that allows tracking changes of sandbox metadata
+Sample Force.com Migration Project for Jenkins that allows tracking changes of developer/sandbox metadata
 
 Gary Hamilton <ghamilton@acumensolutions.com>
-Version 1.0
+Version 1.1
 
-* Download files to Jenkins job ./workspace folder, can also be downloaded to folder and run manually.
-* build.xml defaults sf.org to "dev".
-  * dev.properties is loaded.
-  * Metadata is downloaded to "dev" sub-folder.
-* Set sf.serverurl, sf.username and sf.password in <sf.org>.properties or as build parameters:
-  * -Dsf.serverurl=test.salesforce.com -Dsf.username=<username> -Dsf.password=<password + security token>
-* Examples
-  * ant : loads default dev.properties with sf.serverurl, sf.username and sf.password values
-  * ant -Dsf.org=UAT : loads UAT.properties with sf.serverurl, sf.username and sf.password values and downloads to UAT folder
-* archive_metadata.sh commits to local git repository, assumes remote "archive" has been defined. 
+* Create Jenkins project
+  * Set Source Code Management to Git
+  * Set repository URL to this project
+  * Leave credentials blank, this is a public repo
+* Run build 
+  * Git project will be downloaded to job workspace
+* Set parameters in dev.properties 
+  * sf.password = your password + security token
+  * sf.username = your username
+  * metadata.directory = login url (test.salesforce.com for sandboxes, login.salesforce.com for production and developer orgs)
+* Modify job
+  * Set Source Code Management to None 
+  * Add Build Step
+    * Invoke Ant
+    * Leave Targets blank or set Salesforce parameters
+      * -Dsf.serverurl=test.salesforce.com -Dsf.username=<username> -Dsf.password=<password + security token>
+  * Set schedule if desired
+  * Build Now to test configuration
+* Enhance job as needed
+  * Add additional job steps
+    * Set sf.org to prefix for properties file: -Dsf.org=QA 
+    * Set metadata.directory to folder for backup
+    * Add build step to run shell script, archive_metadata.sh commits to local git repo
 
