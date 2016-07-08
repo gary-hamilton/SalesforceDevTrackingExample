@@ -12,4 +12,3 @@ git add *
 echo 	"git commit -a -m \"$BUILD_ID\""
 git commit -a -m "$BUILD_ID"
 git tag $BUILD_ID
-git push archive
